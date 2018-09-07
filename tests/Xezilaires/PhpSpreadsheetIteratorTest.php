@@ -35,6 +35,7 @@ use Xezilaires\Test\Model\Product;
  */
 class PhpSpreadsheetIteratorTest extends TestCase
 {
+    use FixtureLoaderTrait;
     use IteratorMatcherTrait;
 
     public function testCanLoadFlatFixtureWithColumnReference(): void
@@ -287,16 +288,6 @@ class PhpSpreadsheetIteratorTest extends TestCase
         $current->price = '6.59';
         static::assertEquals($current, $iterator->current());
         static::assertEquals(0, $iterator->key());
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return \SplFileObject
-     */
-    private function fixture(string $name): \SplFileObject
-    {
-        return new \SplFileObject(__DIR__.'/../../resources/fixtures/'.$name);
     }
 
     /**

@@ -5,8 +5,8 @@ endif
 QA_DOCKER_IMAGE=jakzal/phpqa:${BUILD_ENV}-alpine
 QA_DOCKER_COMMAND=docker run --init --interactive --tty --rm --env "COMPOSER_HOME=/composer" --user "$(shell id -u):$(shell id -g)" --volume /tmp/tmp-phpqa-$(shell id -u):/tmp --volume "$(shell pwd):/project" --volume "${HOME}/.composer:/composer" --workdir /project ${QA_DOCKER_IMAGE}
 
-dist: composer-validate cs phpstan psalm test
-ci: check test
+dist: composer-validate cs phpstan psalm test benchmark
+ci: check test benchmark
 check: composer-validate cs-check phpstan psalm
 test: phpunit-coverage infection
 
@@ -37,8 +37,11 @@ infection: phpunit-coverage
 phpunit-coverage: ensure
 	sh -c "${QA_DOCKER_COMMAND} phpdbg -qrr vendor/bin/phpunit --verbose --coverage-text --log-junit=var/phpunit.junit.xml --coverage-xml var/coverage-xml/"
 
-phpunit:
+phpunit: ensure
 	sh -c "${QA_DOCKER_COMMAND} phpunit --verbose"
+
+benchmark: ensure
+	sh -c "${QA_DOCKER_COMMAND} phpbench run --store --iterations=10 --report=aggregate"
 
 ensure:
 	mkdir -p ${HOME}/.composer /tmp/tmp-phpqa-$(shell id -u)
