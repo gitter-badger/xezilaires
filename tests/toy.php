@@ -12,15 +12,15 @@ declare(strict_types=1);
  */
 
 use Tree\Node\NodeInterface;
-use Xezilaires\Bridge\PhpSpreadsheet\Iterator;
 use Xezilaires\Metadata\ColumnReference;
 use Xezilaires\Metadata\Mapping;
+use Xezilaires\SpreadsheetIterator;
 use Xezilaires\Test\Model\Category;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-$reader = new Iterator(
-    new SplFileObject(__DIR__.'/../resources/fixtures/categories.xls'),
+$reader = new SpreadsheetIterator(
+    new \Xezilaires\Bridge\PhpSpreadsheet\Spreadsheet(new SplFileObject(__DIR__.'/../resources/fixtures/categories.xls')),
     new Mapping(
         Category::class,
         [

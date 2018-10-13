@@ -10,6 +10,7 @@
     },
     "mutators": {
         "@default": true,
-        "IdenticalEqual": false
+        "IdenticalEqual": false,
+        "NotIdenticalNotEqual": false
     }
 }
