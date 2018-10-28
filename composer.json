@@ -31,6 +31,7 @@
         "symfony/serializer": "^3.0 | ^4.0"
     },
     "require-dev": {
+        "box/spout": "^2.0",
         "doctrine/annotations": "^1.6",
         "nicmart/tree": "^0.2, >= 0.2.4",
         "phpoffice/phpspreadsheet": "^1.0",
@@ -40,6 +41,7 @@
         "symfony/property-info": "^3.0 | ^4.0"
     },
     "suggest": {
+        "box/spout": "Read CSV or Excel files with Spout",
         "phpoffice/phpspreadsheet": "Read Excel files with PhpSpreadsheet"
     },
     "conflict": {
